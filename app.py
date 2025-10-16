@@ -5,6 +5,7 @@ app = Flask(__name__)
 @app.route("/ussd", methods=["POST"])
 def ussd():
     text = request.form.get("text", "")
+    phone_number = request.form.get("phoneNumber", "")
     response = ""
 
     # Split user input by "*"
@@ -26,7 +27,7 @@ def ussd():
         # Step 3 — user entered location, now confirm
         spot_name = user_input[1]
         location = user_input[2]
-        response = f"END Spot '{spot_name}' at '{location}' submitted successfully!"
+        response = f"END Spot '{spot_name}' at '{location}' submitted successfully by {phone_number}!"
 
     elif text == "2":
         # Just a sample static list
